@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>917 Local</title>
+
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+        background:#000;
+        color:#fff;
+        font-family:"Helvetica Neue",Arial,sans-serif;
+        overflow-x:hidden;
+    }
+
+    /* HERO SECTION — UPDATED FOR background.png */
+    .hero{
+        height:100vh;
+
+        /* NEW PATTERN BACKGROUND */
+        background:
+          linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.9)),
+          url("/imgs/background.png") center/1200px repeat;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        position:relative;
+
+        /* VIGNETTE (unchanged) */
+        box-shadow: inset 0 0 220px 120px rgba(0,0,0,0.85);
+    }
+
+    .hero-logo{
+        width:70vmin;
+        max-width:680px;
+        min-width:340px;
+        border-radius:50%;
+        opacity:0.98;
+        filter:drop-shadow(0 0 25px rgba(184,148,85,0.4))
+               drop-shadow(0 0 70px rgba(255,220,130,0.2));
+        animation:fadeIn 2s ease-in-out forwards, waveMotion 7s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn{
+        0%{opacity:0;transform:scale(0.9);}
+        100%{opacity:1;transform:scale(1);}
+    }
+    @keyframes waveMotion{
+        0%{transform:translateY(0) scale(1);}
+        25%{transform:translateY(-3px) scale(1.02);}
+        50%{transform:translateY(0) scale(1.03);}
+        75%{transform:translateY(3px) scale(1);}
+        100%{transform:translateY(0) scale(1);}
+    }
+
+    .scroll-down{
+        position:absolute;
+        bottom:40px;
+        font-size:14px;
+        opacity:0.7;
+        animation:bounce 2s infinite;
+    }
+    @keyframes bounce{
+        0%,100%{transform:translateY(0);}
+        50%{transform:translateY(-8px);}
+    }
+
+    /* MENU BAR */
+    .menu{
+        display:flex;
+        justify-content:center;
+        gap:60px;
+        padding:60px 0 40px;
+        background:linear-gradient(to bottom,#000000 20%,#0b0b0b 80%);
+    }
+    .menu-option{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        cursor:pointer;
+        transition:.2s;
+    }
+    .menu-option img{
+        width:90px;
+        transition:.3s;
+        filter:drop-shadow(0 0 0 rgba(255,215,100,0));
+    }
+    .menu-option:hover img{
+        transform:scale(1.08);
+        filter:drop-shadow(0 0 25px rgba(255,215,100,0.9));
+    }
+    .menu-option button{
+        margin-top:10px;
+        background:none;
+        color:#fff;
+        border:1px solid #444;
+        padding:10px 28px;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:15px;
+        transition:.3s;
+    }
+    .menu-option button:hover{
+        background:#222;
+        border-color:#888;
+        transform:scale(1.05);
+    }
+
+    /* CATEGORY SECTIONS */
+    .category{
+        display:none;
+    }
+    .category.active{
+        display:block;
+    }
+
+    /* PRODUCT */
+    .products{
+        display:flex;
+        justify-content:center;
+        padding:100px 20px 140px;
+        background:#0f0f0f;
+    }
+    .product{
+        background:#141414;
+        padding:40px;
+        border-radius:16px;
+        border:1px solid rgba(255,215,100,0.3);
+        width:420px;
+        text-align:center;
+        box-shadow:0 0 30px rgba(255,215,100,0.08);
+        transition:.3s;
+        position:relative;
+    }
+    .product:hover{
+        transform:translateY(-8px);
+        border-color:rgba(255,215,100,0.6);
+        box-shadow:0 0 40px rgba(255,215,100,0.25);
+    }
+    .product img{
+        width:115%;
+        transform:translateX(-7%);
+        border-radius:14px;
+        margin-bottom:18px;
+        transition:.4s;
+    }
+    .product img:hover{
+        transform:translateX(-7%) scale(1.05);
+    }
+    .product h3{
+        font-size:1.6rem;
+        margin-bottom:10px;
+    }
+    .details{
+        opacity:0.85;
+        line-height:1.6;
+    }
+
+    /* SOCIAL */
+    .order{
+        background:#111;
+        text-align:center;
+        padding:120px 20px 140px;
+    }
+    .order h2{
+        margin-bottom:30px;
+        font-size:1.9rem;
+    }
+    .social-links{
+        display:flex;
+        justify-content:center;
+        gap:30px;
+    }
+    .social-links a{
+        width:65px;
+        height:65px;
+        border-radius:50%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        transition:.3s;
+    }
+    .social-links img{
+        width:34px;
+        height:34px;
+    }
+    .instagram{
+        background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+    }
+    .instagram:hover{transform:scale(1.1);}
+    .snapchat{
+        background:#FFFC00;
+    }
+    .snapchat:hover{transform:scale(1.1);}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <img src="/imgs/917local.png" class="hero-logo">
+    <div class="scroll-down">↓ Scroll to Explore</div>
+</section>
+
+<!-- MENU -->
+<section class="menu">
+    <div class="menu-option" data-target="flower">
+        <img src="/imgs/flower_icon.png">
+        <button>Flower</button>
+    </div>
+
+    <div class="menu-option" data-target="prerolls">
+        <img src="/imgs/rolls.png">
+        <button>Pre-Rolls</button>
+    </div>
+</section>
+
+<!-- FLOWER SECTION -->
+<section id="flower" class="category active">
+    <div class="products">
+        <div class="product">
+            <img src="/imgs/TropCherry.png">
+            <h3>Trop Cherry</h3>
+            <p>$25 — 3.5g</p>
+            <div class="details">
+                <p><strong>Genetics:</strong> Tropicana Cookies × Cherry Cookies</p>
+                <p><strong>Type:</strong> Hybrid (Sativa-Dominant)</p>
+                <p><strong>THCA:</strong> 30.56%</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRE ROLL SECTION -->
+<section id="prerolls" class="category">
+    <div class="products">
+        <div class="product">
+            <img src="/imgs/rolls.png">
+            <h3>Trop Cherry Pre-Roll</h3>
+            <p>$10 — 1g</p>
+            <div class="details">
+                <p><strong>Material:</strong> Trop Cherry Flower</p>
+                <p><strong>Type:</strong> Hybrid</p>
+                <p><strong>THCA:</strong> 25.20%</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="order">
+  <h2>To Place Orders</h2>
+
+  <div class="social-links">
+    <a href="https://www.instagram.com/917local?igsh=NTV1cXprOGtxZGJr&utm_source=qr"
+       target="_blank" class="instagram">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+           style="filter: invert(1) brightness(2);">
+    </a>
+
+    <a href="https://snapchat.com/t/iKsCLKPy"
+       target="_blank" class="snapchat">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/snapchat.svg"
+           style="filter: invert(1);">
+    </a>
+  </div>
+</section>
+
+<script>
+/* TOGGLE SYSTEM */
+document.querySelectorAll('.menu-option').forEach(option=>{
+    option.addEventListener('click', ()=>{
+        let target = option.getAttribute('data-target');
+
+        document.querySelectorAll('.category').forEach(sec=>{
+            sec.classList.remove('active');
+        });
+
+        document.getElementById(target).classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
